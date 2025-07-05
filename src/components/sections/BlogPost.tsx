@@ -54,7 +54,7 @@ export default function BlogPost({ post, allPosts = [] }: BlogPostProps) {
     })
   }
 
-  // Medium-style typography for reading
+    // Medium-style typography for reading
   const richTextOptions = {
     renderMark: {
       [MARKS.BOLD]: (text: ReactNode) => (
@@ -67,6 +67,15 @@ export default function BlogPost({ post, allPosts = [] }: BlogPostProps) {
         <code className="bg-gray-100 dark:bg-gray-800 text-sm px-1.5 py-0.5 rounded font-mono">
           {text}
         </code>
+      ),
+      [MARKS.UNDERLINE]: (text: ReactNode) => (
+        <u className="underline">{text}</u>
+      ),
+      [MARKS.SUBSCRIPT]: (text: ReactNode) => (
+        <sub className="text-xs">{text}</sub>
+      ),
+      [MARKS.SUPERSCRIPT]: (text: ReactNode) => (
+        <sup className="text-xs">{text}</sup>
       ),
     },
     renderNode: {
@@ -90,18 +99,33 @@ export default function BlogPost({ post, allPosts = [] }: BlogPostProps) {
           {children}
         </h3>
       ),
+      [BLOCKS.HEADING_4]: (node: unknown, children: ReactNode) => (
+        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 mt-5">
+          {children}
+        </h4>
+      ),
+      [BLOCKS.HEADING_5]: (node: unknown, children: ReactNode) => (
+        <h5 className="text-base font-semibold text-gray-900 dark:text-white mb-2 mt-4">
+          {children}
+        </h5>
+      ),
+      [BLOCKS.HEADING_6]: (node: unknown, children: ReactNode) => (
+        <h6 className="text-sm font-semibold text-gray-900 dark:text-white mb-2 mt-4">
+          {children}
+        </h6>
+      ),
       [BLOCKS.UL_LIST]: (node: unknown, children: ReactNode) => (
-        <ul className="list-disc list-inside mb-4 space-y-1 text-gray-900 dark:text-gray-100">
+        <ul className="list-disc ml-6 mb-4 space-y-2 text-gray-900 dark:text-gray-100">
           {children}
         </ul>
       ),
       [BLOCKS.OL_LIST]: (node: unknown, children: ReactNode) => (
-        <ol className="list-decimal list-inside mb-4 space-y-1 text-gray-900 dark:text-gray-100">
+        <ol className="list-decimal ml-6 mb-4 space-y-2 text-gray-900 dark:text-gray-100">
           {children}
         </ol>
       ),
       [BLOCKS.LIST_ITEM]: (node: unknown, children: ReactNode) => (
-        <li className="mb-1">{children}</li>
+        <li className="mb-2 leading-7 pl-2">{children}</li>
       ),
       [BLOCKS.QUOTE]: (node: unknown, children: ReactNode) => (
         <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 my-6 italic text-gray-700 dark:text-gray-300">
@@ -110,6 +134,33 @@ export default function BlogPost({ post, allPosts = [] }: BlogPostProps) {
       ),
       [BLOCKS.HR]: () => (
         <hr className="my-8 border-gray-200 dark:border-gray-700" />
+      ),
+      // Tablo desteği
+      [BLOCKS.TABLE]: (_node: unknown, children: ReactNode) => (
+        <div className="overflow-x-auto my-6">
+          <table className="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
+            {children}
+          </table>
+        </div>
+      ),
+      [BLOCKS.TABLE_HEADER_CELL]: (_node: unknown, children: ReactNode) => (
+        <th className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 px-4 py-2 text-left font-semibold text-gray-900 dark:text-white">
+          {children}
+        </th>
+      ),
+      [BLOCKS.TABLE_CELL]: (_node: unknown, children: ReactNode) => (
+        <td className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">
+          {children}
+        </td>
+      ),
+      [BLOCKS.TABLE_ROW]: (_node: unknown, children: ReactNode) => (
+        <tr>{children}</tr>
+      ),
+      // Code block desteği  
+      [BLOCKS.EMBEDDED_ENTRY]: () => (
+        <div className="my-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <p className="text-gray-600 dark:text-gray-400 text-sm">Embedded content</p>
+        </div>
       ),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       [INLINES.HYPERLINK]: (node: any, children: ReactNode) => (
@@ -122,7 +173,61 @@ export default function BlogPost({ post, allPosts = [] }: BlogPostProps) {
           {children}
         </a>
       ),
+      // Embedded asset (resim, video vs.)
+      [BLOCKS.EMBEDDED_ASSET]: (node: unknown) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const asset = (node as any)?.data?.target
+        if (asset?.fields?.file?.url) {
+          const url = `https:${asset.fields.file.url}`
+          const title = asset.fields.title || 'Embedded asset'
+          const description = asset.fields.description || ''
+          
+          if (asset.fields.file.contentType?.startsWith('image/')) {
+            return (
+              <div className="my-8">
+                <Image 
+                  src={url} 
+                  alt={title}
+                  width={800}
+                  height={600}
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+                {description && (
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center italic">
+                    {description}
+                  </p>
+                )}
+              </div>
+            )
+          }
+        }
+        return (
+          <div className="my-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
+            <p className="text-yellow-800 dark:text-yellow-200 text-sm">
+              Embedded asset yüklenemedi
+            </p>
+          </div>
+        )
+      },
     },
+    // Bilinmeyen node type'lar için fallback
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fallbackRenderer: (node: any) => {
+      console.warn('Unknown node type in rich text:', node.nodeType, node)
+      return (
+        <div className="my-4 p-4 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg">
+          <p className="text-gray-600 dark:text-gray-400 text-sm font-mono">
+            Unsupported content type: {node.nodeType}
+          </p>
+          <details className="mt-2">
+            <summary className="text-xs cursor-pointer text-gray-500">Debug info</summary>
+            <pre className="text-xs mt-1 text-gray-500 overflow-auto">
+              {JSON.stringify(node, null, 2)}
+            </pre>
+          </details>
+        </div>
+      )
+    }
   }
 
   const handleShare = async () => {

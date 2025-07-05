@@ -5,6 +5,8 @@ import { Github, Linkedin, Twitter, Mail, Heart, ExternalLink, Coffee, Rocket } 
 import { usePathname } from 'next/navigation'
 
 export default function Footer() {
+  const pathname = usePathname()
+  
   const mobileApps = [
     { name: 'KPSS GO', emoji: '📚' },
     { name: 'Medication Tracker', emoji: '💊' },
@@ -15,12 +17,18 @@ export default function Footer() {
     { name: 'Ve daha fazlası...', emoji: '🚀' }
   ]
 
-  const quickLinks = [
-    { name: 'Hakkımda', href: '#about', emoji: '🙋‍♂️', download: false },
-    { name: 'Eserlerim', href: '#projects', emoji: '🎨', download: false },
-    { name: 'Selam De!', href: '#contact', emoji: '👋', download: false },
-    { name: 'CV İndir', href: '/SencerGok_Ozgecmis.pdf', emoji: '📄', download: true }
-  ]
+  // Ana sayfa için relative linkler, diğer sayfalar için absolute linkler
+  const getQuickLinks = () => {
+    const isHomePage = pathname === '/'
+    return [
+      { name: 'Hakkımda', href: isHomePage ? '#about' : '/#about', emoji: '🙋‍♂️', download: false },
+      { name: 'Eserlerim', href: isHomePage ? '#projects' : '/#projects', emoji: '🎨', download: false },
+      { name: 'Selam De!', href: isHomePage ? '#contact' : '/#contact', emoji: '👋', download: false },
+      { name: 'CV İndir', href: '/SencerGok_Ozgecmis.pdf', emoji: '📄', download: true }
+    ]
+  }
+
+  const quickLinks = getQuickLinks()
 
   const socialLinks = [
     {

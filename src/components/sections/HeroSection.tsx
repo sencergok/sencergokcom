@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from "framer-motion"
-import { ChevronDown, Download, ExternalLink, Smartphone, Heart } from 'lucide-react'
+import { Download, ExternalLink, Smartphone, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useRef } from 'react'
@@ -11,7 +11,7 @@ export default function HeroSection() {
 
   const skills = [
     "React & Next.js 🚀",
-    "React Native ��", 
+    "React Native 📱", 
     "TypeScript 💪", 
     "Swift & SwiftUI 🍎",
     "Node.js ⚡",
@@ -234,7 +234,21 @@ export default function HeroSection() {
               whileTap={{ scale: 0.95 }}
               className="cursor-pointer"
             >
-              <Button variant="outline" size="lg" className="px-8 py-3 text-lg font-semibold border-2 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="px-8 py-3 text-lg font-semibold border-2 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
+                onClick={() => {
+                  // PDF dosyasını indirmek için link oluştur ve tıkla
+                  const link = document.createElement('a')
+                  link.href = '/SencerGok_Ozgecmis.pdf'
+                  link.download = 'SencerGok_Ozgecmis.pdf'
+                  link.target = '_blank'
+                  document.body.appendChild(link)
+                  link.click()
+                  document.body.removeChild(link)
+                }}
+              >
                 <Download className="mr-2" size={20} />
                 CV İndir
               </Button>
@@ -315,14 +329,6 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 2.3 }}
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center space-y-2 text-gray-400 dark:text-gray-500 cursor-pointer"
-        >
-          <span className="text-sm font-medium">Aşağıya bak 👇</span>
-          <ChevronDown size={24} />
-        </motion.div>
       </motion.div>
     </section>
   )

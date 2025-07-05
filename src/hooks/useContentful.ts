@@ -5,9 +5,7 @@ import { ProjectEntry } from '@/types/contentful'
 
 // Generic hook for fetching data
 export function useContentfulData<T>(
-  fetcher: () => Promise<T>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dependencies: any[] = []
+  fetcher: () => Promise<T>
 ) {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState(true)
@@ -25,7 +23,7 @@ export function useContentfulData<T>(
     } finally {
       setLoading(false)
     }
-  }, [fetcher, dependencies])
+  }, [fetcher])
 
   useEffect(() => {
     fetchData()
@@ -59,7 +57,7 @@ export function useProjects(options: {
     return response.json()
   }, [category, featured, limit])
 
-  return useContentfulData(fetcher, [category, featured, limit])
+  return useContentfulData(fetcher)
 }
 
 // Hook for searching projects
@@ -85,7 +83,7 @@ export function useProjectSearch(searchTerm: string, debounceMs = 500) {
     return response.json()
   }, [debouncedTerm])
 
-  return useContentfulData(fetcher, [debouncedTerm])
+  return useContentfulData(fetcher)
 }
 
 // Hook for real-time content updates (using SSE or WebSocket)

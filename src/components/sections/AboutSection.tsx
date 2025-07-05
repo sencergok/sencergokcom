@@ -43,7 +43,7 @@ export default function AboutSection() {
       color: 'text-green-600 dark:text-green-400',
       bgColor: 'bg-green-100 dark:bg-green-900/30',
       items: [
-        { name: 'Node.js', level: 80 },
+        { name: 'Supabase', level: 85 },
         { name: 'REST APIs', level: 85 },
         { name: 'Git & GitHub', level: 90 },
         { name: 'Figma & Design', level: 85 },

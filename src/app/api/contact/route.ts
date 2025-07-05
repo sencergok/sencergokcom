@@ -51,7 +51,7 @@ function sanitizeInput(input: string): string {
 export async function POST(request: NextRequest) {
   try {
     // IP adresini al
-    const headersList = headers()
+    const headersList = await headers()
     const forwardedFor = headersList.get('x-forwarded-for')
     const realIp = headersList.get('x-real-ip')
     const ip = forwardedFor?.split(',')[0] || realIp || '127.0.0.1'

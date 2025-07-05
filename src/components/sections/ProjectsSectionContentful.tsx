@@ -135,7 +135,6 @@ export default function ProjectsSectionContentful({
                   {getAssetUrl(project.thumbnail) || getAssetUrl(project.images?.[0]) ? (
                     <>
                       <Image
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         src={getAssetUrl(project.thumbnail) || getAssetUrl(project.images?.[0]) || ''}
                         alt={project.title}
                         fill

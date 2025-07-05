@@ -46,6 +46,11 @@ export async function POST(request: NextRequest) {
         await revalidateProjects()
         break
       
+      case 'blogPost':
+        // Revalidate blog-related pages
+        await revalidateBlog()
+        break
+      
       case 'about':
         // Revalidate about section
         await revalidateAbout()
@@ -142,6 +147,13 @@ async function revalidateProjects() {
   console.log('Projects revalidated')
 }
 
+async function revalidateBlog() {
+  revalidateTag('blog')
+  revalidatePath('/blog')
+  revalidatePath('/') // Ana sayfa da blog preview içeriyor
+  console.log('Blog content revalidated')
+}
+
 async function revalidateAbout() {
   revalidateTag('about')
   revalidatePath('/')
@@ -162,9 +174,11 @@ async function revalidateContact() {
 
 async function revalidateAll() {
   revalidateTag('projects')
+  revalidateTag('blog')
   revalidateTag('about')
   revalidateTag('hero')
   revalidateTag('contact')
   revalidatePath('/')
+  revalidatePath('/blog')
   console.log('All content revalidated')
 } 

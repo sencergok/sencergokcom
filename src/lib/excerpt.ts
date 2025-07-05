@@ -6,6 +6,7 @@ export function extractTextFromRichText(content: Document): string {
   
   let text = ''
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function extractText(node: any): void {
     if (node.nodeType === 'text') {
       text += node.value || ''
