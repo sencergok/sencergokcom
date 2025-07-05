@@ -39,17 +39,20 @@ export const getClient = (preview = false) => {
 // Generic function to fetch entries with error handling
 export async function fetchEntries<T>(
   contentType: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   query: Record<string, any> = {},
   preview = false
 ): Promise<T[]> {
   try {
     const selectedClient = getClient(preview)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response: EntryCollection<any> = await selectedClient.getEntries({
       content_type: contentType,
       include: 10, // Include referenced entries up to 10 levels
       ...query,
     })
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return response.items.map((item: Entry<any>) => ({
       ...item.fields,
       id: item.sys.id,
@@ -70,6 +73,7 @@ export async function fetchEntry<T>(
 ): Promise<T | null> {
   try {
     const selectedClient = getClient(preview)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const entry: Entry<any> = await selectedClient.getEntry(entryId, {
       include: 10,
     })
@@ -93,8 +97,8 @@ export async function fetchEntry<T>(
 // Cache-friendly wrapper with revalidation
 export async function fetchEntriesWithCache<T>(
   contentType: string,
-  query: Record<string, any> = {},
-  revalidate = 3600 // 1 hour cache
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  query: Record<string, any> = {}
 ): Promise<T[]> {
   const cacheKey = `${contentType}_${JSON.stringify(query)}`
   

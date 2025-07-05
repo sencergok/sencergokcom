@@ -6,6 +6,7 @@ import { ProjectEntry } from '@/types/contentful'
 // Generic hook for fetching data
 export function useContentfulData<T>(
   fetcher: () => Promise<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dependencies: any[] = []
 ) {
   const [data, setData] = useState<T | null>(null)
@@ -24,7 +25,7 @@ export function useContentfulData<T>(
     } finally {
       setLoading(false)
     }
-  }, dependencies)
+  }, [fetcher, dependencies])
 
   useEffect(() => {
     fetchData()

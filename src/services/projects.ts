@@ -17,19 +17,16 @@ export async function getProjects(
       skip = 0,
       category,
       featured,
-      status = 'published',
       order = ['-sys.createdAt']
     } = query
 
     // Build Contentful query - only add filters that exist
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const contentfulQuery: Record<string, any> = {
       limit,
       skip,
       order,
     }
-
-    // Only add status filter if we're sure the field exists
-    // contentfulQuery['fields.status'] = status
 
     // Add optional filters only if they're provided and we know fields exist
     if (category) {
@@ -154,6 +151,7 @@ export async function getProjectStats(preview = false): Promise<{
 /**
  * Transform project data and add computed fields
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function transformProject(project: any): ProjectEntry {
   return {
     ...project,
@@ -185,7 +183,6 @@ function transformProject(project: any): ProjectEntry {
     // Set defaults for missing fields
     rating: project.rating || 4.5,
     downloads: project.downloads || '1K+',
-    status: project.status || 'published',
     emoji: project.emoji || '🚀',
     gradient: project.gradient || { from: 'from-blue-500', to: 'to-purple-600' },
     stats: project.stats || {
@@ -212,7 +209,6 @@ function getFallbackProjects(): ProjectEntry[] {
       rating: 4.8,
       downloads: '5K+',
       releaseDate: '2024-01-01',
-      status: 'published',
       featured: true, // Featured project
       emoji: '📚',
       gradient: { from: 'from-blue-500', to: 'to-blue-700' },
@@ -237,7 +233,6 @@ function getFallbackProjects(): ProjectEntry[] {
       rating: 4.6,
       downloads: '3K+',
       releaseDate: '2024-03-15',
-      status: 'published',
       featured: true, // Featured project
       emoji: '💊',
       gradient: { from: 'from-green-500', to: 'to-emerald-600' },
@@ -262,7 +257,6 @@ function getFallbackProjects(): ProjectEntry[] {
       rating: 4.3,
       downloads: '1.5K+',
       releaseDate: '2024-06-01',
-      status: 'published',
       featured: false, // Not featured
       emoji: '💧',
       gradient: { from: 'from-cyan-500', to: 'to-blue-600' },

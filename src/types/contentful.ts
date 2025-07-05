@@ -1,4 +1,5 @@
 import { Asset } from 'contentful'
+import { Document } from '@contentful/rich-text-types'
 
 // Base interface for all Contentful entries
 export interface ContentfulEntry {
@@ -23,7 +24,6 @@ export interface ProjectEntry extends ContentfulEntry {
   rating?: number
   downloads?: string
   releaseDate: string
-  status: 'published' | 'in-development' | 'deprecated'
   featured: boolean // Required field - indicates if project is featured/highlighted
   emoji?: string
   gradient?: {
@@ -124,17 +124,51 @@ export interface SocialLink {
   description: string
 }
 
-// Blog post content type (for future use)
-export interface BlogPostEntry extends ContentfulEntry {
+// Blog Post Types
+export interface BlogPostFields {
   title: string
   slug: string
-  excerpt: string
-  content: any // Rich text from Contentful
-  thumbnail?: Asset
-  tags: string[]
-  publishedAt: string
-  readingTime: number
-  featured: boolean
+  content: Document
+  featuredImage?: Asset
+  tags?: string[]
+  readingTime?: number
+  seoTitle?: string
+  seoDescription?: string
+  author?: string
+}
+
+export interface BlogPostEntry {
+  sys: {
+    id: string
+    createdAt: string
+    updatedAt: string
+    contentType: {
+      sys: {
+        id: 'blogPost'
+      }
+    }
+  }
+  fields: BlogPostFields
+}
+
+// Blog Category Types  
+export interface BlogCategoryFields {
+  name: string
+  slug: string
+  description?: string
+  color?: string
+}
+
+export interface BlogCategoryEntry {
+  sys: {
+    id: string
+    contentType: {
+      sys: {
+        id: 'blogCategory'
+      }
+    }
+  }
+  fields: BlogCategoryFields
 }
 
 // Generic asset helper
@@ -150,7 +184,9 @@ export interface ContentfulAsset {
 
 // Helper function to transform Contentful assets
 export function transformAsset(asset: Asset): ContentfulAsset {
-  const file = asset.fields.file
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const file = asset.fields.file as any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const details = file?.details as any
   
   return {
@@ -170,7 +206,6 @@ export interface ProjectsQuery {
   skip?: number
   category?: string
   featured?: boolean
-  status?: string
   order?: string[]
 }
 

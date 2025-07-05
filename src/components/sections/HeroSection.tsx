@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from "framer-motion"
 import { ChevronDown, Download, ExternalLink, Smartphone, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -8,17 +8,10 @@ import { useRef } from 'react'
 
 export default function HeroSection() {
   const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   const skills = [
     "React & Next.js 🚀",
-    "React Native 📱", 
+    "React Native ��", 
     "TypeScript 💪", 
     "Swift & SwiftUI 🍎",
     "Node.js ⚡",
@@ -26,10 +19,10 @@ export default function HeroSection() {
   ]
 
   const funFacts = [
-    "☕ Günde 4+ kahve içerim",
+    "☕ Günde 2+ kahve içerim",
     "🌙 Gece kodlamayı severim", 
     "🎧 Lo-fi müzik eşliğinde kodlarım",
-    "🐱 2 kedim var (onlar da kod review yapar)"
+    "🚀 Her gün yeni bir şey öğrenirim"
   ]
 
   return (
@@ -40,7 +33,6 @@ export default function HeroSection() {
       {/* Animated Background Elements */}
       <motion.div
         className="absolute inset-0"
-        style={{ y, opacity }}
       >
         {/* Floating Shapes */}
         <motion.div
@@ -222,7 +214,16 @@ export default function HeroSection() {
               whileTap={{ scale: 0.95 }}
               className="cursor-pointer"
             >
-              <Button size="lg" className="px-8 py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 cursor-pointer">
+              <Button 
+                size="lg" 
+                className="px-8 py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 cursor-pointer"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact')
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+              >
                 <Heart className="mr-2" size={20} />
                 Birlikte Çalışalım!
               </Button>

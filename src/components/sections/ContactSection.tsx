@@ -60,15 +60,37 @@ export default function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulated form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000)
+    try {
+      // Form verilerini API'ye gönder
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        // Başarılı gönderim
+        setIsSubmitted(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        console.log('✅ Form başarıyla gönderildi:', result)
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000)
+      } else {
+        // Hata durumu
+        console.error('❌ Form gönderim hatası:', result)
+        alert(result.error || 'Mesaj gönderilirken bir hata oluştu.')
+      }
+    } catch (error) {
+      console.error('❌ Network error:', error)
+      alert('Bağlantı hatası! Lütfen internet bağlantınızı kontrol edin.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const containerVariants = {

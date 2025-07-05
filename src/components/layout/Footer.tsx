@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Twitter, Mail, Heart, ExternalLink, Coffee, Rocket } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
   const mobileApps = [
@@ -15,30 +16,30 @@ export default function Footer() {
   ]
 
   const quickLinks = [
-    { name: 'Hakkımda', href: '#about', emoji: '🙋‍♂️' },
-    { name: 'Eserlerim', href: '#projects', emoji: '🎨' },
-    { name: 'Selam De!', href: '#contact', emoji: '👋' },
-    { name: 'CV İndir', href: '#', emoji: '📄' }
+    { name: 'Hakkımda', href: '#about', emoji: '🙋‍♂️', download: false },
+    { name: 'Eserlerim', href: '#projects', emoji: '🎨', download: false },
+    { name: 'Selam De!', href: '#contact', emoji: '👋', download: false },
+    { name: 'CV İndir', href: '/SencerGok_Ozgecmis.pdf', emoji: '📄', download: true }
   ]
 
   const socialLinks = [
     {
       name: 'GitHub',
-      href: 'https://github.com',
+      href: 'https://github.com/sencergok',
       icon: Github,
       color: 'hover:text-gray-900 dark:hover:text-white',
       description: 'Open source projelerim'
     },
     {
       name: 'LinkedIn',
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/in/sencergok',
       icon: Linkedin,
       color: 'hover:text-blue-600 dark:hover:text-blue-400',
       description: 'Profesyonel network'
     },
     {
       name: 'Twitter',
-      href: 'https://twitter.com',
+      href: 'https://x.com/sencerdev',
       icon: Twitter,
       color: 'hover:text-blue-400 dark:hover:text-blue-300',
       description: 'Günlük düşüncelerim'
@@ -168,6 +169,11 @@ export default function Footer() {
                   <a
                     href={link.href}
                     className="flex items-center space-x-2 text-sm text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+                    {...(link.download && { 
+                      download: true, 
+                      target: '_blank',
+                      rel: 'noopener noreferrer'
+                    })}
                   >
                     <span className="text-base">{link.emoji}</span>
                     <span>{link.name}</span>
@@ -255,27 +261,11 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-600">
-              <motion.a
-                href="#"
-                className="hover:text-gray-300 dark:hover:text-gray-400 transition-colors duration-200 cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-              >
-                Gizlilik Politikası
-              </motion.a>
-              <span>•</span>
-              <motion.a
-                href="#"
-                className="hover:text-gray-300 dark:hover:text-gray-400 transition-colors duration-200 cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-              >
-                Kullanım Şartları
-              </motion.a>
-              <span>•</span>
               <motion.span
                 className="flex items-center space-x-1 cursor-default"
                 whileHover={{ scale: 1.05 }}
               >
-                <span>🇹�� Türkiye&apos;den</span>
+                <span>🇹🇷 Türkiye&apos;den</span>
                 <Rocket className="w-3 h-3" />
               </motion.span>
             </div>

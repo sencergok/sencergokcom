@@ -2,15 +2,18 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Code, Smartphone, Mail, Sun, Moon } from 'lucide-react'
+import { Menu, X, Code, Smartphone, Mail, Sun, Moon, PenTool } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -21,11 +24,18 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const menuItems = [
-    { href: '#about', label: 'Hakkımda', icon: Code },
-    { href: '#projects', label: 'Projelerim', icon: Smartphone },
-    { href: '#contact', label: 'Selam De! 👋', icon: Mail },
-  ]
+  // Ana sayfa için relative linkler, diğer sayfalar için absolute linkler
+  const getMenuItems = () => {
+    const isHomePage = pathname === '/'
+    return [
+      { href: '/blog', label: 'Blog', icon: PenTool },
+      { href: isHomePage ? '#about' : '/#about', label: 'Hakkımda', icon: Code },
+      { href: isHomePage ? '#projects' : '/#projects', label: 'Projelerim', icon: Smartphone },
+      { href: isHomePage ? '#contact' : '/#contact', label: 'İletişime Geç! 👋', icon: Mail },
+    ]
+  }
+
+  const menuItems = getMenuItems()
 
   if (!mounted) return null
 
@@ -48,11 +58,11 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <a href="#" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2">
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Sencer 🚀
+                Sencer Gök 🚀
               </span>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}

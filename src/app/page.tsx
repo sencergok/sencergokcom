@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 // Components
 import HeroSection from '@/components/sections/HeroSection'
@@ -11,8 +10,7 @@ import ContactSection from '@/components/sections/ContactSection'
 // Services
 import { getFeaturedProjects } from '@/services/projects'
 
-// Types
-import { ProjectEntry } from '@/types/contentful'
+// Types (sadece ihtiyaç duyulanlar için)
 
 // Loading Components
 function ProjectsLoading() {
@@ -81,58 +79,105 @@ async function ProjectsSection() {
 
 // Metadata for SEO
 export const metadata: Metadata = {
-  title: "Sencer Gök - Frontend & Mobil Developer | Modern App Development",
-  description: "Kahve eşliğinde kod yazan, kullanıcı deneyimini önceleyerek modern uygulamalar geliştiren bir developer. App Store'da 7+ başarılı uygulama.",
+  title: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici | React Native & Swift Uzmanı",
+  description: "Sencer Gök - Frontend ve mobil yazılım geliştirme uzmanı. React, React Native, Swift ile 7+ mobil uygulama. Modern web arayüzleri ve mobil çözümler. App Store'da 10K+ kullanıcıya ulaşan projeler.",
   keywords: [
+    "Sencer Gök",
+    "sencer gök", 
+    "Sencer",
+    "sencer",
     "frontend developer",
-    "mobil uygulama",
-    "react",
-    "react native", 
-    "swift",
-    "ios developer",
-    "app store",
-    "sencer gök",
-    "next.js",
-    "typescript",
-    "ui/ux design"
+    "mobil yazılım geliştirici",
+    "mobil yazılım",
+    "frontend geliştirici",
+    "web frontend developer",
+    "ios developer", 
+    "react developer",
+    "react native developer",
+    "swift developer",
+    "mobil uygulama geliştirici",
+    "app store developer",
+    "next.js developer",
+    "typescript developer",
+    "ui/ux developer",
+    "javascript developer",
+    "web tasarım",
+    "frontend teknolojileri",
+    "mobil app developer",
+    "ankara frontend developer",
+    "ankara mobil yazılım",
+    "türkiye frontend developer",
+    "türkiye mobil yazılım",
+    "ios app developer turkey",
+    "react native turkey",
+    "frontend developer ankara",
+    "mobil yazılım ankara"
   ],
-  authors: [{ name: "Sencer Gök", url: "https://sencergok.com" }],
+  authors: [
+    { name: "Sencer Gök", url: "https://sencergok.com" },
+    { name: "Sencer", url: "https://sencergok.com" }
+  ],
   creator: "Sencer Gök",
+  publisher: "Sencer Gök",
+  applicationName: "Sencer Gök Portfolio",
+  category: "Technology",
+  classification: "Business",
   openGraph: {
     type: "website",
     locale: "tr_TR",
     url: "https://sencergok.com",
-    title: "Sencer Gök - Frontend & Mobil Developer",
-    description: "Kahve eşliğinde kod yazan, App Store'da 7+ başarılı uygulamam var. Modern teknolojilerle harika deneyimler yaratıyorum.",
-    siteName: "Sencer Gök",
+    title: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici",
+    description: "Sencer Gök - Frontend ve mobil yazılım uzmanı. React, React Native, Swift ile App Store'da 7+ uygulama, 10K+ kullanıcı. Modern web arayüzleri ve mobil çözümler geliştiren deneyimli developer.",
+    siteName: "Sencer Gök Portfolio",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-sencer-gok.jpg",
         width: 1200,
         height: 630,
-        alt: "Sencer Gök - Frontend & Mobil Developer"
+        alt: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sencer Gök - Frontend & Mobil Developer",
-    description: "Kahve eşliğinde kod yazan, App Store'da 7+ başarılı uygulamam var.",
-    images: ["/og-image.jpg"]
+    title: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici",
+    description: "Frontend ve mobil yazılım uzmanı Sencer Gök. React, React Native, Swift ile App Store'da 7+ uygulama geliştirdi, 10K+ kullanıcıya ulaştı.",
+    images: ["/og-sencer-gok.jpg"],
+    creator: "@sencerdev",
+    site: "@sencerdev"
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: "your-google-verification-code", // Google Search Console
+    yandex: "your-yandex-verification-code", // Yandex Webmaster
+  },
+  other: {
+    "name": "Sencer Gök",
+    "profession": "Frontend Developer & Mobil Yazılım Geliştirici",
+    "location": "Ankara, Türkiye",
+    "skills": "Frontend Development, Mobil Yazılım, React, React Native, Swift, Next.js, TypeScript, iOS Development",
+    "experience": "3+ yıl frontend ve mobil yazılım geliştirme deneyimi",
+    "projects": "7+ App Store uygulaması, 10K+ kullanıcı, Modern web arayüzleri",
+    "specialties": "Frontend teknolojileri, Mobil uygulama geliştirme, UI/UX tasarım"
+  },
   alternates: {
-    canonical: "https://sencergok.com"
+    canonical: "https://sencergok.com",
+    languages: {
+      'tr-TR': 'https://sencergok.com',
+      'en-US': 'https://sencergok.com/en'
+    }
   }
 }
 
