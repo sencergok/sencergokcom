@@ -75,7 +75,7 @@ const projectsData = [
       "Zamanlanmış temizlik",
       "Hızlı erişim widget'ı"
     ],
-    technologies: ["Swift", "AVAudioEngine", "Core Animation", "SwiftUI"],
+    technologies: ["Swift", "AVAudioEngine", "SwiftUI"],
     githubUrl: "",
     appStoreUrl: "https://apps.apple.com/tr/app/water-remover-tool/id6479998186",
     rating: 4.5,
