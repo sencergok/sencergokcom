@@ -74,12 +74,12 @@ export default function ContactSection() {
 
       if (response.ok) {
         // Başarılı gönderim
-        setIsSubmitted(true)
-        setFormData({ name: '', email: '', subject: '', message: '' })
+    setIsSubmitted(true)
+    setFormData({ name: '', email: '', subject: '', message: '' })
         console.log('✅ Form başarıyla gönderildi:', result)
-        
-        // Reset success message after 5 seconds
-        setTimeout(() => setIsSubmitted(false), 5000)
+    
+    // Reset success message after 5 seconds
+    setTimeout(() => setIsSubmitted(false), 5000)
       } else {
         // Hata durumu
         console.error('❌ Form gönderim hatası:', result)

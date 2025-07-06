@@ -152,4 +152,9 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Scroll margin for sections to account for fixed header */
+  section[id] {
+    scroll-margin-top: 100px;
+  }
 }

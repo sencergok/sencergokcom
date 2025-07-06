@@ -25,7 +25,7 @@ export default function Footer() {
       { name: 'Eserlerim', href: isHomePage ? '#projects' : '/#projects', emoji: '🎨', download: false },
       { name: 'Selam De!', href: isHomePage ? '#contact' : '/#contact', emoji: '👋', download: false },
       { name: 'CV İndir', href: '/SencerGok_Ozgecmis.pdf', emoji: '📄', download: true }
-    ]
+  ]
   }
 
   const quickLinks = getQuickLinks()

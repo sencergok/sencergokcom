@@ -152,7 +152,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             Kahve eşliğinde kod yazıyor, kullanıcı deneyimini önceleyerek
-            <span className="text-blue-600 dark:text-blue-400 font-semibold"> hayal kurabileceğiniz her uygulamayı</span> gerçeğe dönüştürüyorum. 
+            <span className="text-blue-600 dark:text-blue-400 font-semibold"> hayal edebileceğiniz her uygulamayı</span> gerçeğe dönüştürüyorum. 
             App Store&apos;da 7+ uygulamamla binlerce kişinin hayatına dokundum! ✨
           </motion.p>
 

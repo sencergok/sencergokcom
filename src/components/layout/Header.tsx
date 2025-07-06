@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Code, Smartphone, Mail, Sun, Moon, PenTool } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function Header() {
@@ -14,6 +14,7 @@ export default function Header() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     setMounted(true)
@@ -23,6 +24,109 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Smooth scroll function - Mobil için optimize edilmiş
+  const scrollToSection = (sectionId: string) => {
+    console.log('🚀 scrollToSection called with:', sectionId)
+    const element = document.getElementById(sectionId)
+    console.log('📍 Found element:', element)
+    
+    if (element) {
+      console.log('🎯 Attempting to scroll to element')
+      
+      // Mobil için delay ekle ve tek method kullan
+      setTimeout(() => {
+        console.log('⏰ Starting smooth scroll')
+        
+        const headerHeight = 100
+        const elementRect = element.getBoundingClientRect()
+        const absoluteElementTop = elementRect.top + window.pageYOffset
+        const scrollToPosition = absoluteElementTop - headerHeight
+        
+        console.log('🎯 Final scroll position:', scrollToPosition)
+        
+        // Sadece manual animation kullan - en tutarlı sonuç
+        const currentScroll = window.pageYOffset
+        const distance = scrollToPosition - currentScroll
+        console.log('🎮 Starting animation - from:', currentScroll, 'to:', scrollToPosition)
+        
+        const startTime = performance.now()
+        const duration = 600 // Daha yumuşak animasyon
+        
+        function animate(currentTime: number) {
+          const elapsed = currentTime - startTime
+          const progress = Math.min(elapsed / duration, 1)
+          
+          // Easing function (ease-out)
+          const easeProgress = 1 - Math.pow(1 - progress, 3)
+          const newPosition = currentScroll + (distance * easeProgress)
+          
+          window.scrollTo(0, newPosition)
+          
+          if (progress < 1) {
+            requestAnimationFrame(animate)
+          } else {
+            console.log('✅ Smooth scroll completed')
+          }
+        }
+        
+        requestAnimationFrame(animate)
+      }, 100) // Mobil için 100ms delay
+    } else {
+      console.error('❌ Element not found with ID:', sectionId)
+    }
+  }
+
+  // Handle navigation clicks
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    console.log('🔗 handleNavClick called with href:', href)
+    const isHomePage = pathname === '/'
+    console.log('🏠 Is home page:', isHomePage)
+    
+    // Eğer anchor link ise (#about, #projects, #contact)
+    if (href.startsWith('#')) {
+      console.log('⚓ Anchor link detected:', href)
+      e.preventDefault()
+      setIsMenuOpen(false) // Mobil menu'yu kapat
+      
+      if (isHomePage) {
+        // Ana sayfadaysa direk scroll yap
+        console.log('📍 Direct scroll on home page')
+        scrollToSection(href.substring(1))
+      } else {
+        // Başka sayfadaysa önce ana sayfaya git, sonra scroll yap
+        console.log('🏠 Navigate to home first, then scroll')
+        router.push('/')
+        setTimeout(() => {
+          scrollToSection(href.substring(1))
+        }, 10)
+      }
+    }
+    // Eğer /#section şeklinde ise
+    else if (href.startsWith('/#')) {
+      console.log('🔗 Home anchor link detected:', href)
+      e.preventDefault()
+      setIsMenuOpen(false) // Mobil menu'yu kapat
+      
+      if (isHomePage) {
+        // Ana sayfadaysa direk scroll yap
+        console.log('📍 Direct scroll on home page (/#)')
+        scrollToSection(href.substring(2))
+      } else {
+        // Başka sayfadaysa önce ana sayfaya git, sonra scroll yap
+        console.log('🏠 Navigate to home first, then scroll (/#)')
+        router.push('/')
+        setTimeout(() => {
+          scrollToSection(href.substring(2))
+        }, 10)
+      }
+    }
+    // Normal link ise (/blog gibi)
+    else {
+      console.log('🔗 Normal link:', href)
+      setIsMenuOpen(false) // Mobil menu'yu kapat
+    }
+  }
 
   // Ana sayfa için relative linkler, diğer sayfalar için absolute linkler
   const getMenuItems = () => {
@@ -71,6 +175,7 @@ export default function Header() {
               <motion.a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(item.href, e)}
                 className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 cursor-pointer"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -206,8 +311,8 @@ export default function Header() {
                 <motion.a
                   key={item.href}
                   href={item.href}
+                  onClick={(e) => handleNavClick(item.href, e)}
                   className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 py-2 cursor-pointer"
-                  onClick={() => setIsMenuOpen(false)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}

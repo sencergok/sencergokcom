@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     "mobil yazılım",
     "frontend geliştirici",
     "web frontend developer",
-    "ios developer", 
+    "ios developer",
     "react developer",
     "react native developer",
     "swift developer",
