@@ -203,6 +203,6 @@ export default function HomePage() {
 }
 
 // ISR Configuration (Next.js 15)
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 30 // Revalidate every hour
 export const dynamic = 'force-static' // Enable static generation
 export const fetchCache = 'force-cache' // Cache all fetch requests

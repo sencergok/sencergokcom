@@ -156,5 +156,5 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 }
 
 // ISR Configuration
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 30 // Revalidate every 5 minutes
 export const dynamic = 'force-static' 
