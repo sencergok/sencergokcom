@@ -46,7 +46,7 @@ async function BlogContent() {
           <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md mx-auto shadow-lg">
             <div className="text-6xl mb-4">📝</div>
             <p className="text-gray-500 dark:text-gray-400">
-              Blog yazıları yakında gelecek!
+              Blog yazıları yakında gelecek 
             </p>
           </div>
         </div>
