@@ -135,6 +135,10 @@ export interface BlogPostFields {
   seoTitle?: string
   seoDescription?: string
   author?: string
+  // New SEO fields from Contentful
+  metaTitle?: string
+  metaDescription?: string
+  metaKeywords?: string[]
 }
 
 export interface BlogPostEntry {

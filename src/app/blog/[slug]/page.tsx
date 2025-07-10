@@ -23,32 +23,56 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
   }
 
-  const { title, content, seoTitle, seoDescription, featuredImage, tags, author } = post.fields
+  const { 
+    title, 
+    content, 
+    seoTitle, 
+    seoDescription, 
+    featuredImage, 
+    tags, 
+    author,
+    metaTitle,
+    metaDescription,
+    metaKeywords 
+  } = post.fields
+  
   const publishedDate = post.sys.createdAt
   const excerpt = content ? generateExcerpt(content, 160) : 'İçerik mevcut değil'
-  const finalTitle = seoTitle || `${title} - Sencer Gök Blog`
-  const finalDescription = seoDescription || `${excerpt} | Sencer Gök tarafından yazılan bu yazıda ${tags?.slice(0, 3).join(', ')} konularında detaylı bilgiler bulabilirsiniz. Frontend ve mobil yazılım geliştirme deneyimleri.`
+  
+  // Priority order for title: metaTitle > seoTitle > title + suffix
+  const finalTitle = metaTitle || seoTitle || `${title} - Sencer Gök Blog`
+  
+  // Priority order for description: metaDescription > seoDescription > generated excerpt
+  const finalDescription = metaDescription || seoDescription || `${excerpt} | Sencer Gök tarafından yazılan bu yazıda ${tags?.slice(0, 3).join(', ')} konularında detaylı bilgiler bulabilirsiniz. Frontend ve mobil yazılım geliştirme deneyimleri.`
+  
+  // Generate keywords combining metaKeywords, tags, and default SEO keywords
+  const defaultKeywords = [
+    `Sencer Gök ${title.toLowerCase()}`,
+    `sencer gök blog`,
+    `frontend ${title.toLowerCase()}`,
+    `mobil yazılım ${title.toLowerCase()}`,
+    "yazılım geliştirme blog",
+    "frontend blog",
+    "mobil yazılım blog",
+    "react blog",
+    "ios geliştirme",
+    "frontend developer blog",
+    "mobil yazılım geliştirici blog"
+  ]
+  
+  const combinedKeywords = [
+    ...(metaKeywords || []), // Use Contentful meta keywords first
+    ...(tags || []).map(tag => `${tag} blog türkçe`),
+    ...(tags || []).map(tag => `sencer gök ${tag.toLowerCase()}`),
+    ...(tags || []).map(tag => `frontend ${tag.toLowerCase()}`),
+    ...(tags || []).map(tag => `mobil yazılım ${tag.toLowerCase()}`),
+    ...defaultKeywords
+  ]
 
   return {
     title: finalTitle,
     description: finalDescription,
-    keywords: [
-      `Sencer Gök ${title.toLowerCase()}`,
-      `sencer gök blog`,
-      `frontend ${title.toLowerCase()}`,
-      `mobil yazılım ${title.toLowerCase()}`,
-      ...(tags || []).map(tag => `${tag} blog türkçe`),
-      ...(tags || []).map(tag => `sencer gök ${tag.toLowerCase()}`),
-      ...(tags || []).map(tag => `frontend ${tag.toLowerCase()}`),
-      ...(tags || []).map(tag => `mobil yazılım ${tag.toLowerCase()}`),
-      "yazılım geliştirme blog",
-      "frontend blog",
-      "mobil yazılım blog",
-      "react blog",
-      "ios geliştirme",
-      "frontend developer blog",
-      "mobil yazılım geliştirici blog"
-    ],
+    keywords: combinedKeywords,
     authors: [
       { name: author || "Sencer Gök", url: "https://sencergok.com" },
       { name: "Sencer", url: "https://sencergok.com/blog" }
@@ -71,17 +95,19 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         {
           url: `https:${featuredImage.fields.file.url}`,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          width: (featuredImage.fields.file.details as any)?.image?.width,
+          width: (featuredImage.fields.file.details as any)?.image?.width || 1200,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          height: (featuredImage.fields.file.details as any)?.image?.height,
-          alt: String(featuredImage.fields.title) || `${title} - Sencer Gök`
+          height: (featuredImage.fields.file.details as any)?.image?.height || 630,
+          alt: String(featuredImage.fields.title) || metaTitle || title,
+          type: (featuredImage.fields.file as any)?.contentType || 'image/jpeg'
         }
       ] : [
         {
           url: "/og-sencer-gok-blog.jpg",
           width: 1200,
           height: 630,
-          alt: `${title} - Sencer Gök Blog`
+          alt: `${title} - Sencer Gök Blog`,
+          type: 'image/jpeg'
         }
       ],
     },
@@ -111,11 +137,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       "article:published_time": publishedDate,
       "article:modified_time": post.sys.updatedAt,
       "article:section": "Technology",
-      "article:tag": tags?.join(', ') || '',
+      "article:tag": [...(tags || []), ...(metaKeywords || [])].join(', '),
       "blog-author": "Sencer Gök",
       "content-language": "tr-TR",
       "article-topics": "Frontend Development, Mobil Yazılım, React, iOS Development",
-      "author-expertise": "Frontend Developer & Mobil Yazılım Geliştirici"
+      "author-expertise": "Frontend Developer & Mobil Yazılım Geliştirici",
+      // Additional SEO meta tags
+      "og:image:alt": String(featuredImage?.fields.title) || metaTitle || title,
+      "og:locale": "tr_TR",
+      "og:site_name": "Sencer Gök Blog"
     },
     alternates: {
       canonical: `https://sencergok.com/blog/${slug}`
