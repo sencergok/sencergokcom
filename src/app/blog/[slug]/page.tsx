@@ -98,16 +98,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
           width: (featuredImage.fields.file.details as any)?.image?.width || 1200,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           height: (featuredImage.fields.file.details as any)?.image?.height || 630,
-          alt: String(featuredImage.fields.title) || metaTitle || title,
-          type: (featuredImage.fields.file as any)?.contentType || 'image/jpeg'
+          alt: String(featuredImage.fields.title) || metaTitle || title
         }
       ] : [
         {
           url: "/og-sencer-gok-blog.jpg",
           width: 1200,
           height: 630,
-          alt: `${title} - Sencer Gök Blog`,
-          type: 'image/jpeg'
+          alt: `${title} - Sencer Gök Blog`
         }
       ],
     },
