@@ -7,7 +7,7 @@ export default function KpssGoPrivacyPolicy() {
       <main className="py-12 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg mx-auto dark:prose-invert">
-            <h1>GİZLİLİK POLİTİKASI</h1>
+            <h1 className="text-3xl font-bold">GİZLİLİK POLİTİKASI</h1>
             
             <h2>1. GİRİŞ</h2>
             <p>
