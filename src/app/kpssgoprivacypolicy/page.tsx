@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 export default function KpssGoPrivacyPolicy() {
   return (
@@ -11,7 +11,7 @@ export default function KpssGoPrivacyPolicy() {
             
             <h2>1. GİRİŞ</h2>
             <p>
-              Bu Gizlilik Politikası, Sencer Gök tarafından geliştirilen "KPSS Kitabım" (bundan sonra "Uygulama" olarak anılacaktır) mobil uygulamasının kullanıcılarının kişisel verilerinin işlenmesi, korunması ve kullanımına ilişkin uygulamalarımızı açıklamaktadır.
+              Bu Gizlilik Politikası, Sencer Gök tarafından geliştirilen &quot;KPSS Kitabım&quot; (bundan sonra &quot;Uygulama&quot; olarak anılacaktır) mobil uygulamasının kullanıcılarının kişisel verilerinin işlenmesi, korunması ve kullanımına ilişkin uygulamalarımızı açıklamaktadır.
             </p>
             <p>
               Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK), Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR) ve ilgili diğer mevzuatlara uygun olarak hazırlanmıştır.
@@ -185,7 +185,7 @@ export default function KpssGoPrivacyPolicy() {
             <p>Bu aktarımlar, uygun güvenlik önlemleri ve yasal düzenlemeler çerçevesinde gerçekleştirilir.</p>
 
             <h2>13. GİZLİLİK POLİTİKASI DEĞİŞİKLİKLERİ</h2>
-            <p>Bu Gizlilik Politikası'nı zaman zaman güncelleyebiliriz. Önemli değişiklikler uygulama içi bildirim ile duyurulacaktır. Politikaya devam eden kullanımınız, değişiklikleri kabul ettiğiniz anlamına gelir.</p>
+            <p>Bu Gizlilik Politikası&apos;nı zaman zaman güncelleyebiliriz. Önemli değişiklikler uygulama içi bildirim ile duyurulacaktır. Politikaya devam eden kullanımınız, değişiklikleri kabul ettiğiniz anlamına gelir.</p>
 
             <h2>14. İLETİŞİM</h2>
             <p>Bu Gizlilik Politikası ile ilgili sorularınız için:</p>
