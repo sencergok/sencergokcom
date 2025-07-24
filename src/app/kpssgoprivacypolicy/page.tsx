@@ -1,4 +1,7 @@
-export default function KpssGpPrivacyPolicy() {
+"use client";
+import React, { useState } from "react";
+
+export default function KpssGoPrivacyPolicy() {
   return (
     <>
       <main className="py-12 md:py-24 lg:py-32">
