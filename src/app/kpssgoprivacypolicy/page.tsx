@@ -11,7 +11,7 @@ export default function KpssGoPrivacyPolicy() {
             
             <h2>1. GİRİŞ</h2>
             <p>
-              Bu Gizlilik Politikası, Sencer Gök tarafından geliştirilen &quot;KPSS Kitabım&quot; (bundan sonra &quot;Uygulama&quot; olarak anılacaktır) mobil uygulamasının kullanıcılarının kişisel verilerinin işlenmesi, korunması ve kullanımına ilişkin uygulamalarımızı açıklamaktadır.
+              Bu Gizlilik Politikası, Sencer Gök tarafından geliştirilen &quot;KPSS GO&quot; (bundan sonra &quot;Uygulama&quot; olarak anılacaktır) mobil uygulamasının kullanıcılarının kişisel verilerinin işlenmesi, korunması ve kullanımına ilişkin uygulamalarımızı açıklamaktadır.
             </p>
             <p>
               Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK), Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR) ve ilgili diğer mevzuatlara uygun olarak hazırlanmıştır.
