@@ -130,7 +130,7 @@ export default function ProjectsSectionContentful({
             {projects.length > 1 && (
               <div className="space-y-4">
                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Diğer projeler</h4>
-                <ul className="divide-y divide-gray-200 dark:divide-gray-800 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <ul className="divide-y divide-gray-200 dark:divide-gray-800 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 max-h-96 overflow-y-auto">
                   {projects.slice(1).map((p) => (
                     <li key={p.id} className="p-4">
                       <div className="flex items-center gap-4">

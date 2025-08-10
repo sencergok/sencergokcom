@@ -219,71 +219,31 @@ export default function AboutSection() {
         >
           <motion.div variants={itemVariants} className="text-center">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Kullandığım Araçlar 🛠️
+              Kullandığım Araçlar
             </h3>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Modern teknolojiler ve best practices ile harika deneyimler yaratıyorum.
+              Projelere göre seçtiğim teknolojiler. Aşağıda öne çıkanlar.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {skills.map((skillGroup, groupIndex) => (
-              <motion.div
-                key={skillGroup.category}
-                variants={itemVariants}
-                custom={groupIndex}
-                whileHover={{ scale: 1.02 }}
-                className="cursor-default"
-              >
-                <Card className="p-6 h-full border rounded-xl bg-white dark:bg-gray-900">
-                  {/* Header */}
-                  <div className="flex items-center space-x-3 mb-6">
-                    <div className={`w-12 h-12 rounded-xl ${skillGroup.bgColor} flex items-center justify-center`}>
-                      <skillGroup.icon className={`w-6 h-6 ${skillGroup.color}`} />
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 dark:text-white">
-                      {skillGroup.category}
-                    </h4>
+          {/* Tag board layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {skills.map((group) => (
+              <Card key={group.category} className="p-6 border rounded-xl bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-10 h-10 rounded-lg ${group.bgColor} flex items-center justify-center`}>
+                    <group.icon className={`w-5 h-5 ${group.color}`} />
                   </div>
-
-                  {/* Skills List */}
-                  <div className="space-y-4">
-                    {skillGroup.items.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ 
-                          duration: 0.6, 
-                          delay: groupIndex * 0.2 + skillIndex * 0.1 
-                        }}
-                        className="space-y-2"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {skill.name}
-                          </span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                            {skill.level}%
-                          </span>
-                        </div>
-                        <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                          <motion.div
-                            className={`h-full rounded-full bg-gray-900 dark:bg-white`}
-                            initial={{ width: 0 }}
-                            animate={isInView ? { width: `${skill.level}%` } : {}}
-                            transition={{ 
-                              duration: 1, 
-                              delay: groupIndex * 0.2 + skillIndex * 0.1 + 0.5,
-                              ease: "easeOut"
-                            }}
-                          />
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </Card>
-              </motion.div>
+                  <div className="text-base font-semibold">{group.category.replace(/ [^ ]+$/, '')}</div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((tool) => (
+                    <Badge key={tool.name} variant="outline" className="px-2.5 py-1 text-xs border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900">
+                      {tool.name}
+                    </Badge>
+                  ))}
+                </div>
+              </Card>
             ))}
           </div>
         </motion.div>
