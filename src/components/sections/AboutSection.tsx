@@ -120,20 +120,20 @@ export default function AboutSection() {
         >
           <motion.div variants={itemVariants}>
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 cursor-default">
-              Hakkımda
+              Çalışma Prensipleri
             </Badge>
           </motion.div>
           <motion.h2 
             variants={itemVariants}
             className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
-            Hakkımda
+            Nasıl Çalışırım
           </motion.h2>
           <motion.p 
             variants={itemVariants}
             className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
           >
-            Frontend ve mobil yazılım geliştirici. Basit, hızlı ve kullanıcı odaklı ürünler geliştiriyorum.
+            Hedefe odaklı, sade ve sürdürülebilir çözümler üretirim. Ölçeklenebilirlik, performans ve erişilebilirlik önceliğimdir.
           </motion.p>
         </motion.div>
 
@@ -146,10 +146,10 @@ export default function AboutSection() {
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Yaklaşım
+              Temel İlkeler
             </h3>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Değer verdiğim özellikler
+              Her projede öncelik verdiğim prensipler
             </p>
           </motion.div>
 
@@ -162,9 +162,7 @@ export default function AboutSection() {
               >
                 <Card className="p-6 h-full border rounded-xl bg-white dark:bg-gray-900">
                   <div className="text-center space-y-4">
-                    <div className="text-4xl mb-3">
-                      {trait.icon}
-                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">İlke</div>
                     <div>
                       <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                         {trait.title}
