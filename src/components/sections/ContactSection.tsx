@@ -122,26 +122,21 @@ export default function ContactSection() {
           className="text-center mb-16"
         >
           <motion.div variants={itemVariants}>
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm cursor-default">
-              Selam De! 👋
+            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 cursor-default">
+              İletişim
             </Badge>
           </motion.div>
           <motion.h2 
             variants={itemVariants}
             className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Konuşalım
-            </span>{' '}
-            ve Birlikte Yapalım!
+            İletişim
           </motion.h2>
           <motion.p 
             variants={itemVariants}
             className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
           >
-            Yeni bir proje için işbirliği yapmak istiyorsanız, sadece merhaba demek istiyorsanız 
-            ya da hangi kahveyi tercih ettiğimi merak ediyorsanız, 
-            bana ulaşmaktan çekinmeyin! Sohbet etmeyi seviyorum ☕
+            Projeniz için hızlı bir görüşme planlayalım.
           </motion.p>
         </motion.div>
 
@@ -155,7 +150,7 @@ export default function ContactSection() {
           >
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Bana Nasıl Ulaşabilirsin? 📲
+                İletişim Bilgileri
               </h3>
             </motion.div>
 
@@ -169,7 +164,7 @@ export default function ContactSection() {
                   transition={{ duration: 0.2 }}
                   className="cursor-pointer"
                 >
-                  <Card className="p-6 hover:shadow-lg transition-all duration-300 border dark:border-gray-700 bg-white dark:bg-gray-800">
+                  <Card className="p-6 border rounded-xl bg-white dark:bg-gray-900">
                     <a 
                       href={contact.href}
                       className="flex items-center space-x-4 group"
@@ -199,11 +194,11 @@ export default function ContactSection() {
               {/* Response Time */}
               <motion.div 
                 variants={itemVariants}
-                className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl border border-gray-200 dark:border-gray-700"
+                className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950"
               >
                 <div className="flex items-center space-x-2 mb-2">
-                  <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Yanıt Süresi ⏰</h4>
+                  <Clock className="w-4 h-4" />
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Yanıt Süresi</h4>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
                   Genellikle <span className="font-semibold text-blue-600 dark:text-blue-400">24 saat</span> içinde 
@@ -214,11 +209,11 @@ export default function ContactSection() {
               {/* Availability */}
               <motion.div 
                 variants={itemVariants}
-                className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-gray-200 dark:border-gray-700"
+                className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950"
               >
                 <div className="flex items-center space-x-2 mb-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
-                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Müsaitlik Durumu 🎯</h4>
+                  <CheckCircle className="w-4 h-4" />
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Müsaitlik</h4>
                 </div>
                 <div className="flex items-center space-x-1 mb-1">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
@@ -232,11 +227,11 @@ export default function ContactSection() {
               {/* Fun Facts */}
               <motion.div 
                 variants={itemVariants}
-                className="p-4 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 rounded-xl border border-gray-200 dark:border-gray-700"
+                className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950"
               >
                 <div className="flex items-center space-x-2 mb-2">
-                  <Coffee className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Fun Fact ☕</h4>
+                  <Coffee className="w-4 h-4" />
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Not</h4>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 text-xs">
                   En iyi fikirlerim gece 00:00-03:00 arası geliyor. O yüzden gece mesaj atarsanız 
@@ -253,13 +248,13 @@ export default function ContactSection() {
             animate={isInView ? "visible" : "hidden"}
           >
             <motion.div variants={itemVariants}>
-              <Card className="p-8 shadow-lg border dark:border-gray-700 bg-white dark:bg-gray-800">
+              <Card className="p-8 border rounded-xl bg-white dark:bg-gray-900">
                 <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
-                    <MessageSquare className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 dark:bg-white flex items-center justify-center">
+                    <MessageSquare className="w-5 h-5 text-white dark:text-black" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                    Mesaj Gönder 💌
+                    Mesaj Gönder
                   </h3>
                 </div>
 
@@ -353,7 +348,7 @@ export default function ContactSection() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full px-8 py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                      className="w-full px-8 py-3 text-lg font-semibold rounded-md bg-gray-900 text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                       {isSubmitting ? (
                         <div className="flex items-center space-x-2">
