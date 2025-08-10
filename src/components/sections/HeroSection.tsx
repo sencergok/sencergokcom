@@ -27,82 +27,8 @@ export default function HeroSection() {
 
   return (
     <section ref={ref} className="min-h-screen relative flex items-center justify-center overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900/20" />
-      
-      {/* Animated Background Elements */}
-      <motion.div
-        className="absolute inset-0"
-      >
-        {/* Floating Shapes */}
-        <motion.div
-          className="absolute top-20 left-10 w-20 h-20 bg-blue-200 dark:bg-blue-500/20 rounded-full opacity-20"
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 180, 360]
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute top-40 right-20 w-16 h-16 bg-purple-200 dark:bg-purple-500/20 rounded-full opacity-20"
-          animate={{
-            y: [0, 20, 0],
-            rotate: [360, 180, 0]
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-40 left-1/4 w-12 h-12 bg-pink-200 dark:bg-pink-500/20 rounded-full opacity-20"
-          animate={{
-            y: [0, -15, 0],
-            x: [0, 10, 0]
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        {/* Fun floating elements */}
-        <motion.div
-          className="absolute top-32 right-1/3 text-4xl"
-          animate={{
-            y: [0, -10, 0],
-            rotate: [0, 5, -5, 0]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          ☕
-        </motion.div>
-        
-        <motion.div
-          className="absolute bottom-32 right-1/4 text-3xl"
-          animate={{
-            y: [0, 15, 0],
-            rotate: [0, -10, 10, 0]
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          🚀
-        </motion.div>
-      </motion.div>
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900" />
 
       <div className="container mx-auto px-4 pt-20 pb-8 relative z-10">
         <div className="text-center space-y-8">
@@ -163,7 +89,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Hakkımda mini bilgiler:</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Kısa notlar:</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {funFacts.map((fact, index) => (
                 <motion.div
@@ -171,7 +97,7 @@ export default function HeroSection() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
-                  className="text-xs bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg p-2 border border-gray-200 dark:border-gray-700"
+                  className="text-xs bg-white dark:bg-gray-900 rounded-md p-2 border border-gray-200 dark:border-gray-800"
                 >
                   {fact}
                 </motion.div>
@@ -195,7 +121,7 @@ export default function HeroSection() {
                 whileHover={{ scale: 1.05, rotate: 2 }}
                 className="cursor-default"
               >
-                <Badge variant="outline" className="px-3 py-1 text-sm font-medium border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+                <Badge variant="outline" className="px-3 py-1 text-sm font-medium border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 bg-white dark:bg-gray-900">
                   {skill}
                 </Badge>
               </motion.div>
@@ -216,7 +142,7 @@ export default function HeroSection() {
             >
               <Button 
                 size="lg" 
-                className="px-8 py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 cursor-pointer"
+                className="px-8 py-3 text-lg font-semibold rounded-md bg-gray-900 text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 cursor-pointer"
                 onClick={() => {
                   const contactSection = document.getElementById('contact')
                   if (contactSection) {
@@ -237,7 +163,7 @@ export default function HeroSection() {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="px-8 py-3 text-lg font-semibold border-2 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
+                className="px-8 py-3 text-lg font-semibold rounded-md border hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
                 onClick={() => {
                   // PDF dosyasını indirmek için link oluştur ve tıkla
                   const link = document.createElement('a')
@@ -310,7 +236,7 @@ export default function HeroSection() {
               href="https://apps.apple.com/us/developer/sencer-gok/id1777568061"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 cursor-pointer"
+              className="inline-flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 cursor-pointer"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -322,14 +248,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 2.3 }}
-      >
-      </motion.div>
+      {/* Scroll Indicator removed for simplicity */}
     </section>
   )
 } 
