@@ -547,4 +547,4 @@ export default function YDSPrivacy() {
       `}</style>
     </div>
   );
-} 
+}

@@ -11,6 +11,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sencergok.com"),
   title: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici | React Native & Swift Uzmanı",
   description: "Sencer Gök - Frontend ve mobil yazılım geliştirme uzmanı. React, React Native, Swift ile 7+ mobil uygulama. Modern web arayüzleri ve mobil çözümler. App Store'da 10K+ kullanıcıya ulaşan projeler.",
   keywords: [
@@ -52,12 +53,21 @@ export const metadata: Metadata = {
     title: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici",
     description: "Sencer Gök - Frontend ve mobil yazılım uzmanı. React, React Native, Swift ile App Store'da 7+ uygulama, 10K+ kullanıcı. Modern web arayüzleri ve mobil çözümler geliştiren deneyimli developer.",
     siteName: "Sencer Gök Portfolio",
+    images: [
+      {
+        url: "/globe.svg",
+        width: 1200,
+        height: 630,
+        alt: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title: "Sencer Gök - Frontend Developer & Mobil Yazılım Geliştirici",
     description: "Frontend ve mobil yazılım uzmanı Sencer Gök. React, React Native, Swift ile App Store'da 7+ uygulama geliştirdi, 10K+ kullanıcıya ulaştı.",
-    creator: "@sencerdev"
+    creator: "@sencerdev",
+    images: ["/globe.svg"]
   },
   robots: {
     index: true,
@@ -79,6 +89,9 @@ export const metadata: Metadata = {
       url: '/apple-touch-icon-precomposed.png',
     },
   },
+  alternates: {
+    canonical: 'https://sencergok.com'
+  }
 };
 
 // JSON-LD Structured Data
