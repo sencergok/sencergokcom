@@ -57,15 +57,24 @@ export async function GET() {
     if (!supabase) {
       return NextResponse.json({ status: 'error', message: 'Server misconfigured: Supabase env missing' }, { status: 500 })
     }
-    const { data, error } = await supabase
+    const { count, error } = await supabase
       .from('seco_clicks')
-      .select('count', { count: 'exact' })
+      .select('*', { count: 'exact', head: true })
 
     if (error) {
-      return NextResponse.json({ status: 'error', message: 'Database connection failed', error: error.message }, { status: 500 })
+      const isMissing = /relation .* does not exist/i.test(error.message)
+      return NextResponse.json(
+        { 
+          status: 'error', 
+          message: isMissing ? 'Table missing' : 'Database connection failed', 
+          error: error.message,
+          code: isMissing ? 'TABLE_MISSING' : 'DB_ERROR'
+        }, 
+        { status: 500 }
+      )
     }
 
-    return NextResponse.json({ status: 'ok', total_clicks: data?.[0]?.count || 0 })
+    return NextResponse.json({ status: 'ok', total_clicks: count || 0 })
   } catch (err) {
     console.error('seco-gel GET health error:', err)
     return NextResponse.json({ status: 'error', message: 'API health check failed' }, { status: 500 })
